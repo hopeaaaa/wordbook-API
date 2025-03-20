@@ -6,19 +6,28 @@ const db = knex(knexConfig);
 
 //get user profile and saved words list
 export const getUserProfile = async (req, res) => {
-  const userId = req.params.userId;
+  const { userId } = req.params;
 
   try {
     const results = await db("users")
       .select(
         "users.id",
-        "users.username",
-        "translations.word",
-        "translations.translation",
-        "translations.pronunciation"
+        "users.user_name",
+        "saved-translations.en_word",
+        "saved-translations.fr_word",
+        "saved-translations.audio_url"
       )
-      .leftJoin("translations", "users.id", "translations.user_id")
+      .leftJoin("saved-translations", "users.id", "saved-translations.user_id")
       .where("users.id", userId);
+
+    /*     const results = {
+      id: userId,
+      name: "Hope Akello",
+      saved-translations: [
+        { id: 1, translation: "Bonjour", pronunciation: "bohn-zhoor" },
+        { id: 2, translation: "Merci", pronunciation: "mehr-see" },
+      ],
+    }; */
 
     res.status(200).json(results);
   } catch (err) {

@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/translate", translationRoute);
 app.use("/pronunciation", pronunciationRoute);
-app.use("/:userId", userProfileRoute);
+app.use("/users", userProfileRoute);
 /* app.use("/saved-translations", savedTranslationsRoute); */
 
 app.use((err, req, res, next) => {
