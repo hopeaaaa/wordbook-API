@@ -4,8 +4,8 @@
  */
 export async function seed(knex) {
   // Deletes ALL existing entries
-  await knex("saved-translations").del();
-  await knex("saved-translations").insert([
+  await knex("savedTranslations").del();
+  await knex("savedTranslations").insert([
     {
       user_id: 1,
       id: 1,
